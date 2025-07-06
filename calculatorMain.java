@@ -2,14 +2,15 @@ import java.util.Scanner;
 public class calculatorMain {
 
 public static void main(String[]args){
+Scanner input = new Scanner(System.in);
 calculator calcOb = new calculator();
 while (true) {
-double fn = calcOb.TheFirstValue();
-String op =calcOb.GettingTheOpreator();
-double sn =calcOb.TheSecondValue();
+double fn = calcOb.TheFirstValue(input);
+String op =calcOb.GettingTheOpreator(input);
+double sn =calcOb.TheSecondValue(input);
 double result = calcOb.TheCalculations(fn,sn,op);
 System.out.println("The Result is " +result);
-String opt = calcOb.ProgramCont();
+String opt = calcOb.ProgramCont(input);
 if (opt.equals("0")) {
 System.out.println("Thanks for using the calculator");
 break;
@@ -23,13 +24,11 @@ else {
 }
 }
 class calculator {
-
-public String GettingTheOpreator() {
-Scanner Theopreator = new Scanner(System.in);
+public String GettingTheOpreator(Scanner input) {
 String op;
 while (true) {
 System.out.println("Enter the opreator");
-op = Theopreator.next();
+op = input.next();
 if (op.equals("/") || op.equals("x") || op.equals("-") || op.equals("+") || op.equals("*")) {
 break;
 }
@@ -41,18 +40,16 @@ System.out.println("Please try again");
 return op;
 }
 
-public double TheFirstValue() {
-Scanner FV = new Scanner(System.in);
+public double TheFirstValue(Scanner input) {
 System.out.println("Enter the first value");
-double fn = FV.nextDouble();
+double fn = input.nextDouble();
 return fn;
 }
 
 
-public double TheSecondValue() {
-Scanner SV = new Scanner(System.in);
+public double TheSecondValue(Scanner input) {
 System.out.println("Enter the second value");
-double sn = SV.nextDouble();
+double sn = input.nextDouble();
 return sn;
 }
 
@@ -81,23 +78,16 @@ break;
 case"-":
 result = fn - sn;
 break;
-
 }
 return result;
-
 }
-public String ProgramCont() {
-Scanner input = new Scanner(System.in);
+    
+public String ProgramCont(Scanner input) {
     System.out.println();
         System.out.println("Do you Wish to Do another Calculation?");
             System.out.println("1.Yes");
                 System.out.println("0.No");
 String opt = input.next();
-
 return opt;
-
 }
-
-
-
 }
