@@ -4,90 +4,61 @@ public class calculatorMain {
 public static void main(String[]args){
 Scanner input = new Scanner(System.in);
 calculator calcOb = new calculator();
-while (true) {
-double fn = calcOb.TheFirstValue(input);
+String opt;
+do {
+int fn = calcOb.TheFirstValue(input, "Enter the first value");
 String op =calcOb.GettingTheOpreator(input);
-double sn =calcOb.TheSecondValue(input);
-double result = calcOb.TheCalculations(fn,sn,op);
-System.out.println("The Result is " +result);
-String opt = calcOb.ProgramCont(input);
-if (opt.equals("0")) {
-System.out.println("Thanks for using the calculator");
-break;
-}
-else {
-    System.out.println("The calculator will continue.....");
+int sn =calcOb.TheSecondValue(input, "Enter the Second value");
+int result = calcOb.TheCalculations(fn,sn,op);
+System.out.println("The Result is " + result);
+opt = calcOb.ProgramCont(input);
+} while(!opt.equals("0"));
 }
 }
 
-
-}
-}
 class calculator {
 public String GettingTheOpreator(Scanner input) {
 String op;
 while (true) {
 System.out.println("Enter the opreator");
 op = input.next();
-if (op.equals("/") || op.equals("x") || op.equals("-") || op.equals("+") || op.equals("*")) {
-break;
+if (op.equals("/") || op.equals("x") || op.equals("-") || op.equals("+") || op.equals("*")) return op;
+else System.out.println("Please try again");
 }
-else {
-System.out.println("Please try again");
 }
 
-}
-return op;
-}
-
-public double TheFirstValue(Scanner input) {
-System.out.println("Enter the first value");
-double fn = input.nextDouble();
-return fn;
+public int TheFirstValue(Scanner input, String msg) {
+System.out.println(msg);
+return input.nextInt();
 }
 
 
-public double TheSecondValue(Scanner input) {
-System.out.println("Enter the second value");
-double sn = input.nextDouble();
-return sn;
+public int TheSecondValue(Scanner input, String msg) {
+System.out.println(msg);
+return input.nextInt();
 }
 
-public double TheCalculations(double fn, double sn, String op) {
-double result = 0;
+public int TheCalculations(int fn, int sn, String op) {
 switch (op) {
 case"+":
-result = fn + sn;
-break;
-
+return fn + sn;
 case"x":
 case"*":
-result = fn * sn;
-break;
-
+return fn * sn;
 case"/":
-if (sn==0)
-{
-    System.out.println("You can't divide by zero");
-}
-else {
-result = fn / sn;
-}
-break;
-
+return (sn == 0) ? 69 : fn / sn;
 case"-":
-result = fn - sn;
-break;
+return fn - sn;
 }
-return result;
+return 0;
 }
     
 public String ProgramCont(Scanner input) {
-    System.out.println();
-        System.out.println("Do you Wish to Do another Calculation?");
-            System.out.println("1.Yes");
-                System.out.println("0.No");
-String opt = input.next();
-return opt;
+System.out.println();
+System.out.println("Do you Wish to Do another Calculation?");
+System.out.println("1.Yes");
+System.out.println("0.No");
+return input.next();
 }
 }
+
